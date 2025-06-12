@@ -52,7 +52,7 @@ body {
 }
 
 .hero {
-    height: calc(100vh - 100px);
+    height: calc(100vh);
     position: relative;
     background: linear-gradient(185deg, rgba(66, 71, 134, 1) 0%, rgb(41, 44, 82) 50%, rgba(0, 0, 0, 1) 100%);
     background-color: #222766;
