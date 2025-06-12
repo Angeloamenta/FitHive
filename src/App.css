@@ -41,7 +41,7 @@ body {
 
 
 .navbar {
-    background: transparent !important;
+    /* background: transparent !important; */
     border-bottom: 1px solid darkgray;
     width: 100%;
   position: fixed !important;
