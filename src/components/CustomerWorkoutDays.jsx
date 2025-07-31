@@ -24,8 +24,7 @@ const days = location.state?.days || [];
                     return(
                         <div>
                         <Link to={`${location.pathname}/giorno/${day.name}`}
-                        state={{exercises: day.exercises}}
-                        >
+                        state={{exercises: day.exercises}}>
                             {day.name}
                         </Link>
                         </div>
