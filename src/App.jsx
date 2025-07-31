@@ -1,15 +1,19 @@
 import './App.css';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // pages
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Schede from './pages/Schede'
+import Customers from './pages/Customers';
 
 // component
 import Navbar from './components/Navbar'
 
-
+// components customer
+import CustomerCard from './components/CustomerCard'
+import CustomerWorkoutDays from './components/CustomerWorkoutDays'
+import CustomerWorkoutExercise from './components/CustomerWorkoutExercise'
 
 
 function App() {
@@ -23,6 +27,12 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/schede" element={<Schede/>}/>
+        <Route path="/utenti" element={<Customers/>}/>
+
+
+        <Route path='/utente/:id' element={<CustomerCard/>}/>
+        <Route path='/utente/:id/:scheda' element={<CustomerWorkoutDays/>}/>
+        <Route path='/utente/:id/:scheda/giorno/:giorno' element={<CustomerWorkoutExercise/>}/>
 
 
       </Routes>

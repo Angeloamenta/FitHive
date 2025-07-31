@@ -44,9 +44,9 @@ body {
     /* background: transparent !important; */
     border-bottom: 1px solid darkgray;
     width: 100%;
-  position: fixed !important;
+  /* position: fixed !important; 
     top: 0;
-    z-index: 1000;
+    z-index: 1000;*/
 
 
 }
