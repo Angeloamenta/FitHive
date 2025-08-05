@@ -35,7 +35,8 @@ const Iscritti = () => {
 
     return (
         <>
-            <div className=" flex gap-2 gap-y-4 flex-wrap flex-row">
+        <div className=" flex justify-center">
+            <div className=" w-11/12 flex justify-center gap-2 gap-y-4 flex-wrap flex-row">
                 {customers &&
                     customers.map((customer, index) => {
                         return (
@@ -53,6 +54,7 @@ const Iscritti = () => {
 
                 }
             </div>
+        </div>
 
         </>
     )

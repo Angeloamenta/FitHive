@@ -38,13 +38,13 @@ const Navbar = () => {
         //         </div>
         //     </div>
         // </nav>
-        <nav className="w-full flex justify-center   pb-5 h-15 ">
-            <div className="flex container justify-between ">
+        <nav className="w-full  flex justify-center h-16 mb-10 ">
+            <div className=" flex w-11/12 justify-between ">
                 <div className="flex items-center">
-                    <h1 className="text-2xl flex r">FitHive</h1>
+                    <h1 className="text-2xl flex ">FitHive</h1>
                 </div>
                 <div>
-                    <ul className="flex gap-10 h-full items-center">
+                    <ul className="hidden md:flex gap-10 h-full items-center">
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
