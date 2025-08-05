@@ -1,41 +1,63 @@
 import { Link } from "react-router-dom"
 import logo from '../assets/img/logo.png'
-import {SquareMenu} from "lucide-react"
-import {Dumbbell} from "lucide-react"
+import { SquareMenu } from "lucide-react"
+import { Dumbbell } from "lucide-react"
 
 
 
 
 const Navbar = () => {
 
-    
+
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid ">
-                <Link className="navbar-brand" to="/"><img className="img-fluid logo" src={logo} alt="" /></Link>
-                <button className="navbar-toggler mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    {/* <SquareMenu /> */}
-                    {/* <Dumbbell color="#ee6115" /> */}
-                    <SquareMenu color="#ee6115" size={36} />
-                </button>
-                <div className="collapse navbar-collapse" id="navbarText">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        // <nav className="navbar ">
+        //     <div className="container-fluid ">
+        //         <Link className="navbar-brand" to="/"><img className="img-fluid logo" src={logo} alt="" /></Link>
+        //         <button className="navbar-toggler mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+
+        //             <SquareMenu color="#ee6115" size={36} />
+        //         </button>
+        //         <div className="collapse navbar-collapse" id="navbarText">
+        //             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        //                 <li className="nav-item">
+        //                     <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+        //                 </li>
+        //                 <li className="nav-item">
+        //                     <Link className="nav-link" to="/schede">Schede</Link>
+        //                 </li>
+        //                 <li className="nav-item">
+        //                     <Link className="nav-link" to="/login">Login</Link>
+        //                 </li>
+        //                 <li>
+        //                     <Link className="nav-link" to="/utenti">Utenti</Link>
+        //                 </li>
+        //             </ul>
+        //             <span className="navbar-text">
+        //                 User
+        //             </span>
+        //         </div>
+        //     </div>
+        // </nav>
+        <nav className="w-full flex justify-center   pb-5 h-15 ">
+            <div className="flex container justify-between ">
+                <div className="flex items-center">
+                    <h1 className="text-2xl flex r">FitHive</h1>
+                </div>
+                <div>
+                    <ul className="flex gap-10 h-full items-center">
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/schede">Schede</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
                         <li>
-                            <Link className="nav-link" to="/utenti">Utenti</Link>
+                            <Link className="nav-link" to="/iscritti">Iscritti</Link>
                         </li>
                     </ul>
-                    <span className="navbar-text">
-                        User
-                    </span>
+                </div>
+                <div className="flex items-center">
+                    <button className="text-2xl btn-white">Log-in</button>
                 </div>
             </div>
         </nav>

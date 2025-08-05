@@ -13,7 +13,7 @@ console.log("load");
     
     return (
         <>
-        <h1>Schede</h1>
+        <h1>Sched</h1>
         </>
     )
 }

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
 
 
 * {
@@ -8,21 +9,38 @@
     margin: 0;
 }
 
+:root {
+    --primary-color: #ee6115;
+    --secondary-color: #282a2b;
+    --black: #0b0a0d;
+    --white:#e6e6e6;
+    --lightblack:#151619;
+}
+
 body {
     /* font-family: "Titillium Web", sans-serif; */
     font-family: "Rajdhani", sans-serif;
     /* font-family: "Exo 2", sans-serif; */
-
-
+background: var(--black);
+color: var(--white)
 
 }
 
-:root {
-    --primary-color: #ee6115;
-    --secondary-color: #282a2b;
-}
 
 /* global */
+
+.btn-white{
+    
+    background-color: var(--white);
+    color: var(--black);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+
+}
 
 .btn-orange {
     background-color: var(--primary-color);
@@ -40,9 +58,9 @@ body {
 }
 
 
-.navbar {
+nav {
     /* background: transparent !important; */
-    border-bottom: 1px solid darkgray;
+    border-bottom: 1px solid rgba(220, 220, 220, 0.355);
     width: 100%;
   /* position: fixed !important; 
     top: 0;
@@ -51,6 +69,15 @@ body {
 
 }
 
+.button-container {
+    position: fixed;
+    bottom:0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+
+/*
 .hero {
     height: calc(100vh);
     position: relative;
@@ -63,4 +90,10 @@ body {
 .h-96 {
     height: 500px;
     position: relative;
+}*/
+
+
+.card-white {
+    background: var(--lightblack) !important;
+    border-radius: 5px;
 }

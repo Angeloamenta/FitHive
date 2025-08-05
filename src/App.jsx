@@ -6,9 +6,13 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Schede from './pages/Schede'
 import Customers from './pages/Customers';
+import Homepage from './pages/Homepage';
+import Iscritti from './pages/Iscritti';
+
 
 // component
 import Navbar from './components/Navbar'
+import BottonNav from './components/BottomNav';
 
 // components customer
 import CustomerCard from './components/CustomerCard'
@@ -24,10 +28,10 @@ function App() {
     <BrowserRouter>
     <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Homepage/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/schede" element={<Schede/>}/>
-        <Route path="/utenti" element={<Customers/>}/>
+        <Route path="/iscritti" element={<Iscritti/>}/>
 
 
         <Route path='/utente/:id' element={<CustomerCard/>}/>
@@ -36,6 +40,7 @@ function App() {
 
 
       </Routes>
+      <BottonNav></BottonNav>
     </BrowserRouter>
   )
 }
