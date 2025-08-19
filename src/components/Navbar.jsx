@@ -57,7 +57,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="flex items-center">
-                    <button className="text-2xl btn-white">Log-in</button>
+                    <Link to="/login" className="text-2xl btn-white">Log-in</Link>
                 </div>
             </div>
         </nav>
