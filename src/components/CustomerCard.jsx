@@ -10,6 +10,10 @@ import axios from "axios";
 
 
 const CustomerCard = () => {
+
+    const URL = import.meta.env.VITE_BASE_URL
+
+
     const params = useParams()
     const [customer, setCustomer] = useState([])
     const navigate = useNavigate();
@@ -17,7 +21,7 @@ const CustomerCard = () => {
 
     useEffect(() => {
         console.log(params.id);
-        axios.get(`http://localhost:3000/customers/${params.id}`)
+        axios.get(`${URL}/customers/${params.id}`)
             .then(function (res) {
                 console.log(res.data);
                 setCustomer(res.data)

@@ -7,11 +7,11 @@ import axios from "axios";
 
 const Iscritti = () => {
     
-
+const URL = import.meta.env.VITE_BASE_URL
 
 
     const fetchCustomers = () => {
-        axios.get('http://localhost:3000/customers/')
+        axios.get(`${URL}/customers/`)
             .then(function (res) {
                 console.log(res);
                 setCustomers(res.data)

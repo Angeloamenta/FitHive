@@ -11,6 +11,8 @@ const BottonNav = () => {
     const navigate = useNavigate();
 
     const goBack = () => {
+        console.log('before',window.location.href.match('/'));
+
         navigate(-1);
     }
 
