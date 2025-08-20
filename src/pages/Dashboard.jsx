@@ -1,8 +1,12 @@
 import { Outlet, NavLink, Navigate, useNavigate,  } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
+
 
 
 
 const Dashboard = () => {
+    const { user } = useAuth();
+
     const navigate = useNavigate()
 
     const goHome = () => {
@@ -14,6 +18,7 @@ const Dashboard = () => {
             <div className=" bg-slate-500 w-50 py-6 ">
                 <div className="welcome text-white text-center">
                     <h2 className="text-2xl" >Benvenuto nella<br/>dashboard</h2>
+                    <h3>Benvenuto {user ? user : "Ospite"}</h3>
                 </div>
                 <ul className="mt-20 text-center flex flex-col gap-4">
                     <li>
