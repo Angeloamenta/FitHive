@@ -26,6 +26,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import Dashboard from './pages/Dashboard';
 import CustomersDashboard from './components/dashboard/CustomersDashboard';
 import DashboardHome from './components/dashboard/DashboardHome';
+import PrivateRoute from './context/PrivateRoute';
 
 function App() {
 
@@ -48,7 +49,15 @@ function App() {
         <Route path='/utente/:id/:scheda' element={<CustomerWorkoutDays />} />
         <Route path='/utente/:id/:scheda/giorno/:giorno' element={<CustomerWorkoutExercise />} />
 
-        <Route path="/dashboard" element={<Dashboard/>}>
+        
+        <Route
+    path="/dashboard/*"
+    element={
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    }
+  >
         <Route index element={<DashboardHome/>} />
         <Route path='customers' element={<CustomersDashboard/>} />
         </Route>

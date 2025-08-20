@@ -2,12 +2,12 @@ import { Link } from "react-router-dom"
 import logo from '../assets/img/logo.png'
 import { SquareMenu } from "lucide-react"
 import { Dumbbell } from "lucide-react"
-
-
-
+import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 const Navbar = () => {
 
+    const {token} = useAuth()
 
     return (
         // <nav className="navbar ">
@@ -56,8 +56,12 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex items-center">
+                <div className="flex gap-3 items-center">
                     <Link to="/login" className="text-2xl btn-white">Log-in</Link>
+                    {token && (
+                        <Link to="/dashboard" className="text-2xl btn-white">Dashboard</Link> 
+                    )}
+
                 </div>
             </div>
         </nav>
