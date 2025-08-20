@@ -22,11 +22,12 @@ import CustomerWorkoutExercise from './components/CustomerWorkoutExercise'
 import NotFoundPage from './pages/NotFoundPage';
 
 //dashboard
+import PrivateRoute from './context/PrivateRoute';
 
 import Dashboard from './pages/Dashboard';
 import CustomersDashboard from './components/dashboard/CustomersDashboard';
 import DashboardHome from './components/dashboard/DashboardHome';
-import PrivateRoute from './context/PrivateRoute';
+import SingleCustomerDashboard from './components/dashboard/SingleCustomerDashboard';
 
 function App() {
 
@@ -36,8 +37,8 @@ function App() {
   return (
 
     <>
-    {!isDashboard && <Navbar/>}
-     
+      {!isDashboard && <Navbar />}
+
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
@@ -49,21 +50,22 @@ function App() {
         <Route path='/utente/:id/:scheda' element={<CustomerWorkoutDays />} />
         <Route path='/utente/:id/:scheda/giorno/:giorno' element={<CustomerWorkoutExercise />} />
 
-        
+
         <Route
-    path="/dashboard/*"
-    element={
-      <PrivateRoute>
-        <Dashboard />
-      </PrivateRoute>
-    }
-  >
-        <Route index element={<DashboardHome/>} />
-        <Route path='customers' element={<CustomersDashboard/>} />
+          path="/dashboard/*"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<DashboardHome />} />
+          <Route path='customers' element={<CustomersDashboard />} />
+          <Route path='customer/:id' element={<SingleCustomerDashboard/>} />
         </Route>
 
 
-        <Route path="*" element={<NotFoundPage/>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <BottonNav></BottonNav>
     </>
