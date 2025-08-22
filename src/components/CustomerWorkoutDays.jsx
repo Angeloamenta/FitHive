@@ -34,7 +34,7 @@ const CustomerWorkoutDays = () => {
   }, [location.state, params]);
 
   return (
-    <div className="min-h-screen bg-black bg-[url('/honeycomb-pattern.svg')] bg-repeat p-6">
+    <div className="min-h-screen bg-[url('/honeycomb-pattern.svg')] bg-repeat p-6">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-extrabold text-white tracking-wider">
           Giorni Allenamento

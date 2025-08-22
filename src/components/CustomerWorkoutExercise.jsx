@@ -131,7 +131,7 @@ const CustomerWorkoutExercises = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black bg-[url('/honeycomb-pattern.svg')] bg-repeat p-6">
+    <div className="min-h-screen bg-repeat p-6">
       <h1 className="text-3xl mb-6 text-center text-white font-extrabold tracking-wide">
         Esercizi
       </h1>
