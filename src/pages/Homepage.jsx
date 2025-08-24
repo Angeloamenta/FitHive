@@ -35,7 +35,7 @@ const Homepage = () => {
         </p>
       </div>
 
-      <div className="mb-12 flex flex-col gap-4">
+      <div className="mb-7 flex flex-col gap-4">
         {userExists ? (
           <button
             onClick={handleLoginClick}
@@ -55,14 +55,14 @@ const Homepage = () => {
         )}
       </div>
 
-      <footer className=" text-gray-400 text-center flex flex-col items-center gap-2">
+      <footer className="pb-15 text-gray-400 text-center flex flex-col items-center gap-2">
         <p className="flex items-center gap-2">
           Created by Angelo Amenta
           <a href="https://github.com/Angeloamenta" target="_blank" rel="noopener noreferrer">
             <Github className="w-6 h-6 text-white hover:text-purple-400 transition" />
           </a>
         </p>
-        <p className="text-sm text-gray-500">© 2025 Web App Palestra</p>
+        <p className="text-sm text-gray-500">©2025 FitHive</p>
       </footer>
     </div>
   );

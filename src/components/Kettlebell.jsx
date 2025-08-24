@@ -20,16 +20,16 @@ const Kettlebell = () => {
   }
 
   return (
-    <div className="h-96 w-full">
+    <div className="h-80 w-full">
       <Canvas
         style={{ background: "none" }}
         gl={{ alpha: true }}
       >
         {/* Luci più forti per risaltare su sfondo nero */}
         <ambientLight intensity={1.2} />             {/* luce globale più intensa */}
-        <directionalLight position={[5, 5, 5]} intensity={2} />   {/* luce principale */}
-        <directionalLight position={[-5, 5, -5]} intensity={4} /> {/* luce di riempimento */}
-        <directionalLight position={[0, -5, 5]} intensity={1} />  {/* luce di backlight */}
+        <directionalLight position={[5, 5, 5]} intensity={10} />   {/* luce principale */}
+        <directionalLight position={[-5, 5, -5]} intensity={10} /> {/* luce di riempimento */}
+        <directionalLight position={[0, -5, 5]} intensity={4} />  {/* luce di backlight */}
 
         {/* Modello */}
         <KettlebellModel />

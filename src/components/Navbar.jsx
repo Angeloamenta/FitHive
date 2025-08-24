@@ -56,7 +56,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex gap-3 items-center">
+                <div className="hidden md:flex gap-3 items-center">
                     <Link to="/login" className="text-2xl btn-white">Log-in</Link>
                     {token && (
                         <Link to="/dashboard" className="text-2xl btn-white">Dashboard</Link> 

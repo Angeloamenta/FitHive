@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserCircle2 } from "lucide-react";
+import { useCustomer } from "../context/CustomerContext";
+
 
 const Iscritti = () => {
   const URL = import.meta.env.VITE_BASE_URL;
+
+  const globalCustomers = useCustomer()
 
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,8 +23,13 @@ const Iscritti = () => {
   };
 
   useEffect(() => {
-    fetchCustomers();
-  }, []);
+    // fetchCustomers();
+     if (globalCustomers.length > 0) {
+    setCustomers(globalCustomers);
+    setLoading(false);
+  }
+    
+  }, [globalCustomers]);
 
   const filteredCustomers = customers.filter(c =>
     c.firstName.toLowerCase().includes(filter.toLowerCase()) ||
@@ -50,7 +59,7 @@ const Iscritti = () => {
 
 
       {loading ? (
-        <p className="text-center text-gray-400 text-xl mt-12">Caricamento...</p>
+        <p className="text-center text-gray-400 text-xl mt-12">Caricamento, potrebbe volerci qualche secondo...</p>
       ) : (
         <div className="flex flex-col items-center gap-4">
           {filteredCustomers.length > 0 ? (
