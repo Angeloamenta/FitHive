@@ -158,9 +158,9 @@ const CustomerWorkoutExercises = () => {
                 />
               </div>
 
-              <div className="text-gray-300 text-sm">{exercise.repset}</div>
+              <div className="text-gray-300 ">{exercise.repset}</div>
               {exercise.notes && <div className="text-gray-400 text-sm italic">{exercise.notes}</div>}
-
+{/* 
               <div className="flex items-center gap-2 mt-2">
                 <span className="text-purple-300 font-mono">{formatTime(timer.time)}</span>
                 <button
@@ -175,13 +175,13 @@ const CustomerWorkoutExercises = () => {
                 >
                   Reset
                 </button>
-              </div>
+              </div> */}
             </li>
           );
         })}
       </ul>
 
-      <div className="mt-6 text-center">
+      <div className="mt-6 text-center pt-8 pb-18">
         <button
           onClick={resetAllChecks}
           className="px-6 py-3 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-semibold"
