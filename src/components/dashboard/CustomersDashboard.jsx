@@ -5,12 +5,16 @@ import { useCustomer } from "../../context/CustomerContext";
 import AddCustomerComponent from "../CrudComponent/AddCustomerComponent";
 import DeleteModal from "../DeleteModal";
 import api from '../../interceptor/axiosClient';
+import { useCrud } from "../../context/CrudContext";
+
 
 const CustomersDashboard = () => {
     const { globalCustomers, fetchCustomers } = useCustomer();
     const [loading, setLoading] = useState(true);
     const [modalActive, setModalActive] = useState(false);
     const [deletedCustomer, setDeleteCustomer] = useState(null);
+
+    const {setCustomerId} = useCrud();
 
     useEffect(() => {
         setLoading(true);
@@ -30,6 +34,11 @@ const CustomersDashboard = () => {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    const selectCustomerId =(id) => {
+        setCustomerId(id)
+        
     }
 
     return (
@@ -80,6 +89,7 @@ const CustomersDashboard = () => {
                                     <td className="px-4 py-2 text-gray-900">
                                         {customer.workoutPlans ? customer.workoutPlans.length : 0}
                                         <Link
+                                        onClick={() =>selectCustomerId(customer._id)}
                                             to={`/dashboard/customer/${customer._id}`}
                                             className="button bg-slate-800 ml-2 text-white rounded-md p-1"
                                         >

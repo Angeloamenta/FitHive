@@ -12,7 +12,7 @@ export const useCrud = ()=> useContext(CrudContext);
 export const CrudProvider = ({children})=> {
 const URL = import.meta.env.VITE_BASE_URL;
 
-
+const [selectedCustomerId, setCustomerId] = useState('')
 
 //   add customers
 const addCustomer = async (name, lastName) => {
@@ -30,7 +30,7 @@ const addCustomer = async (name, lastName) => {
 
 
     return(
-        <CrudContext.Provider value={{addCustomer}}>
+        <CrudContext.Provider value={{addCustomer, setCustomerId, selectedCustomerId}}>
             {children}
         </CrudContext.Provider>
     )
