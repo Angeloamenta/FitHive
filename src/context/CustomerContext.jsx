@@ -12,19 +12,22 @@ export const CustomerProvider = ({children})=> {
 
    const [globalCustomers, setGlobalCustomers] = useState([])
 
-   
-
-   useEffect(() => {
-    axios.get(`${URL}/customers`)
+   const fetchCustomers = () => {
+     axios.get(`${URL}/customers`)
     .then((res) => {
         console.log(res.data);  
         setGlobalCustomers(res.data)  
     })
     .catch((err) => {console.log(err);
     })
+   }
+   
+
+   useEffect(() => {
+   fetchCustomers()
    }, [])
     return(
-        <CustomerContext.Provider value={globalCustomers}>
+        <CustomerContext.Provider value={{globalCustomers, fetchCustomers}}>
             {children}
         </CustomerContext.Provider>
     )

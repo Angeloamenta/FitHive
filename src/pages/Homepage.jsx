@@ -27,6 +27,8 @@ const Homepage = () => {
       
       <div className="relative flex flex-col items-center mb-12">
         <Kettlebell />
+        <iframe className="w-80 absolute top-55 opacity-70" src="https://lottie.host/embed/35f7bcff-6e5f-43fc-9d85-7bfd33ed0277/mbay5s9ote.lottie"></iframe>
+        <iframe className="w-8 hidden top-55 opacity-70" src="https://lottie.host/embed/7723dfb0-fffe-4c54-bfcb-355674451961/dTk8lq4wrg.lottie"></iframe>
         <h1 className="mt-6 text-4xl md:text-5xl text-white font-extrabold tracking-wider text-center">
           Benvenuti su FitHive
         </h1>

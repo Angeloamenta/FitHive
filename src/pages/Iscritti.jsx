@@ -1,44 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { UserCircle2 } from "lucide-react";
 import { useCustomer } from "../context/CustomerContext";
 
-
 const Iscritti = () => {
-  const URL = import.meta.env.VITE_BASE_URL;
-
-  const globalCustomers = useCustomer()
-
-  const [customers, setCustomers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { globalCustomers } = useCustomer(); // prendo direttamente i clienti dal context
   const [filter, setFilter] = useState("");
 
-  const fetchCustomers = () => {
-    setLoading(true);
-    axios.get(`${URL}/customers/`)
-      .then(res => setCustomers(res.data))
-      .catch(err => console.log(err))
-      .finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    // fetchCustomers();
-     if (globalCustomers.length > 0) {
-    setCustomers(globalCustomers);
-    setLoading(false);
-  }
-    
-  }, [globalCustomers]);
-
-  const filteredCustomers = customers.filter(c =>
-    c.firstName.toLowerCase().includes(filter.toLowerCase()) ||
-    c.lastName.toLowerCase().includes(filter.toLowerCase())
+  // filtro dinamico direttamente sui dati del context
+  const filteredCustomers = globalCustomers?.filter(
+    (c) =>
+      c.firstName.toLowerCase().includes(filter.toLowerCase()) ||
+      c.lastName.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen  bg-repeat p-6">
-      <h1 className="text-3xl text-white font-extrabold mb-6 text-center">Iscritti</h1>
+    <div className="min-h-screen bg-repeat p-6">
+      <h1 className="text-3xl text-white font-extrabold mb-6 text-center">
+        Iscritti
+      </h1>
 
       {/* Filtro */}
       <div className="flex gap-2 justify-center mb-6 max-w-md mx-auto">
@@ -57,9 +37,10 @@ const Iscritti = () => {
         </button>
       </div>
 
-
-      {loading ? (
-        <p className="text-center text-gray-400 text-xl mt-12">Caricamento, potrebbe volerci qualche secondo...</p>
+      {globalCustomers?.length === 0 ? (
+        <p className="text-gray-400 text-xl mt-12 text-center">
+          Nessun iscritto trovato.
+        </p>
       ) : (
         <div className="flex flex-col items-center gap-4">
           {filteredCustomers.length > 0 ? (
@@ -71,13 +52,19 @@ const Iscritti = () => {
               >
                 <UserCircle2 className="w-12 h-12 text-purple-300 flex-shrink-0" />
                 <div className="flex flex-col">
-                  <p className="text-white text-xl font-semibold">{customer.firstName}</p>
-                  <p className="text-white text-xl font-semibold">{customer.lastName}</p>
+                  <p className="text-white text-xl font-semibold">
+                    {customer.firstName}
+                  </p>
+                  <p className="text-white text-xl font-semibold">
+                    {customer.lastName}
+                  </p>
                 </div>
               </Link>
             ))
           ) : (
-            <p className="text-gray-400 text-xl mt-12">Nessun iscritto trovato.</p>
+            <p className="text-gray-400 text-xl mt-12 text-center">
+              Nessun iscritto trovato con questo filtro.
+            </p>
           )}
         </div>
       )}
@@ -86,3 +73,4 @@ const Iscritti = () => {
 };
 
 export default Iscritti;
+

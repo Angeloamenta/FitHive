@@ -1,53 +1,68 @@
-import { Outlet, NavLink, Navigate, useNavigate, Link,  } from "react-router-dom"
-import { useAuth } from "../context/AuthContext"
-
-
-
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Dashboard = () => {
-    const { user, logout } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  const goHome = () => navigate("/");
 
-    const goHome = () => {
-        navigate('/')
-    }
-
-    return (
-        <div className="dashboard bg-white text-black h-full flex">
-            <div className=" bg-slate-500 w-50 py-6 px-5">
-                <div className="welcome text-white text-center">
-                    <h2 className="text-2xl" >Benvenuto nella<br/>dashboard</h2>
-                    <h3 className="text-2xl font-bold">{user ? user : "Ospite"}</h3>
-                </div>
-                <ul className="mt-20 text-left text-white flex flex-col gap-4">
-                    <li>
-                        <NavLink className="hover:underline" to='/dashboard'>Dashboard Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink className="hover:underline" to='/dashboard/customers'>Utenti</NavLink>
-                    </li>
-
-                </ul>
-                <div className="mt-20 text-center text-white flex justify-center">
-                    <h3 onClick={goHome} className="w-[80%] hover:cursor-pointer hover:bg-black hover:text-white rounded-md">
-                        <div>
-                            &larr;
-                        </div>
-                         Torna al sito
-                    </h3>
-                </div>
-                <div className="flex justify-center mt-5">
-                    <button className="rounded-md bg-black p-1 text-white" onClick={logout}>
-                        Logout
-                    </button>
-                </div>
-            </div>
-            <div className="flex-1 p-6">
-                <Outlet />
-            </div>
+  return (
+    <div className="flex h-screen bg-gray-100 text-gray-900">
+      {/* Sidebar */}
+      <aside className="w-60 bg-white shadow-lg flex flex-col justify-between p-6">
+        <div>
+          <div className="text-center mb-12">
+            <h3 className="text-xl font-bold capitalize text-gray-800">
+              {user ? user : "Ospite"}
+            </h3>
+          </div>
+          <nav className="flex flex-col gap-4">
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `p-3 rounded-lg transition hover:bg-indigo-100 ${
+                  isActive ? "bg-indigo-200 font-semibold" : ""
+                }`
+              }
+            >
+              Dashboard Home
+            </NavLink>
+            <NavLink
+              to="/dashboard/customers"
+              className={({ isActive }) =>
+                `p-3 rounded-lg transition hover:bg-indigo-100 ${
+                  isActive ? "bg-indigo-200 font-semibold" : ""
+                }`
+              }
+            >
+              Utenti
+            </NavLink>
+          </nav>
         </div>
-    )
-}
 
-export default Dashboard
+        <div className="flex flex-col gap-3">
+          <button
+            onClick={goHome}
+            className="w-full p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+          >
+            &larr; Torna al sito
+          </button>
+          <button
+            onClick={logout}
+            className="w-full p-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
+          >
+            Logout
+          </button>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <main className="flex-1 p-8 overflow-auto">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
+
+export default Dashboard;
