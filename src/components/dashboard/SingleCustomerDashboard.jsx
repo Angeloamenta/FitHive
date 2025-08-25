@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useCustomer } from "../../context/CustomerContext";
 import { useCrud } from "../../context/CrudContext";
 import WorkoutPlans from "./WorkoutPlans";
+import AddWorkoutPlan from "../CrudComponent/AddWorkoutPlan";
+
 
 
 const SingleCustomerDashboard = () => {
@@ -41,6 +43,7 @@ const SingleCustomerDashboard = () => {
         </div>
       </div>
       <div>
+        <AddWorkoutPlan/>
         <WorkoutPlans/>
       </div>
     </div>

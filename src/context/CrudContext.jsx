@@ -28,9 +28,22 @@ const addCustomer = async (name, lastName) => {
    }
 }
 
+// delete workout plan
+
+const deleteWorkout = async  (planId) => {
+
+    try {
+        const res = await api.delete(`${URL}/customers/${selectedCustomerId}/workout/${planId}`)
+        return res
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
 
     return(
-        <CrudContext.Provider value={{addCustomer, setCustomerId, selectedCustomerId}}>
+        <CrudContext.Provider value={{addCustomer, setCustomerId, selectedCustomerId, deleteWorkout}}>
             {children}
         </CrudContext.Provider>
     )
