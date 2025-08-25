@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, use } from "react";
 
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
@@ -7,6 +7,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+  const [loading,setLoading] = useState(false)
 const URL = import.meta.env.VITE_BASE_URL
 
 
@@ -20,6 +21,7 @@ const URL = import.meta.env.VITE_BASE_URL
 
   // Funzione di login
   const login = async (name, password) => {
+    setLoading(true)
     try {
       const res = await axios.post(`${URL}/auth/login`, {
         name,
@@ -36,6 +38,9 @@ const URL = import.meta.env.VITE_BASE_URL
     } catch (error) {
       console.error("Login error:", error);
     }
+    finally{
+      setLoading(false)
+    }
   };
 
   // Funzione di logout
@@ -47,7 +52,7 @@ const URL = import.meta.env.VITE_BASE_URL
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, login, logout }}>
+    <AuthContext.Provider value={{ token, user,loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
