@@ -1,7 +1,9 @@
+
+
 const AddWorkoutPlan = () => {
     return (
         <div>
-            <h1>workout</h1>
+            <h1> add workout</h1>
         </div>
     )
 }

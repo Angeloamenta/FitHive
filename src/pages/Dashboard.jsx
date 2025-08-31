@@ -38,6 +38,16 @@ const Dashboard = () => {
             >
               Utenti
             </NavLink>
+            <NavLink
+              to="/dashboard/workout"
+              className={({ isActive }) =>
+                `p-3 rounded-lg transition hover:bg-indigo-100 ${
+                  isActive ? "bg-indigo-200 font-semibold" : ""
+                }`
+              }
+            >
+              Crea Schede
+            </NavLink>
           </nav>
         </div>
 

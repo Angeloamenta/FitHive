@@ -6,6 +6,7 @@ import AddWorkoutPlan from "../CrudComponent/AddWorkoutPlan";
 
 
 
+
 const SingleCustomerDashboard = () => {
   const { globalCustomers } = useCustomer();
   const { selectedCustomerId } = useCrud();
@@ -43,7 +44,6 @@ const SingleCustomerDashboard = () => {
         </div>
       </div>
       <div>
-        <AddWorkoutPlan/>
         <WorkoutPlans/>
       </div>
     </div>

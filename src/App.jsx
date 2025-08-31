@@ -28,6 +28,7 @@ import Dashboard from './pages/Dashboard';
 import CustomersDashboard from './components/dashboard/CustomersDashboard';
 import DashboardHome from './components/dashboard/DashboardHome';
 import SingleCustomerDashboard from './components/dashboard/SingleCustomerDashboard';
+import WorkoutCreator from './components/dashboard/WorkoutCreator';
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
           <Route index element={<DashboardHome />} />
           <Route path='customers' element={<CustomersDashboard />} />
           <Route path='customer/:id' element={<SingleCustomerDashboard/>} />
+          <Route path='workout' element={<WorkoutCreator/>} />
         </Route>
 
 

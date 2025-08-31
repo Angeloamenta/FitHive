@@ -160,22 +160,6 @@ const CustomerWorkoutExercises = () => {
 
               <div className="text-gray-300 ">{exercise.repset}</div>
               {exercise.notes && <div className="text-gray-400 text-sm italic">{exercise.notes}</div>}
-{/* 
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-purple-300 font-mono">{formatTime(timer.time)}</span>
-                <button
-                  onClick={() => toggleTimer(exercise.name)}
-                  className="px-3 py-1 rounded-xl bg-purple-700 hover:bg-purple-500 text-white"
-                >
-                  {timer.running ? "Stop" : "Start"}
-                </button>
-                <button
-                  onClick={() => resetTimer(exercise.name)}
-                  className="px-3 py-1 rounded-xl bg-gray-600 hover:bg-gray-500 text-white"
-                >
-                  Reset
-                </button>
-              </div> */}
             </li>
           );
         })}
