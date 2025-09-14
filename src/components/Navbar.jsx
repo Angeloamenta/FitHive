@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom"
-import logo from '../assets/img/logo.png'
 import { SquareMenu } from "lucide-react"
 import { Dumbbell } from "lucide-react"
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
+// import logo from '../assets/img/logo-3.png'
 
 const Navbar = () => {
 
@@ -48,14 +47,17 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className="nav-link" to="/schede">Schede</Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link className="nav-link" to="/iscritti">Iscritti</Link>
                         </li>
                     </ul>
                 </div>
+                {/* <div>
+                    <img className="w-[150%] h-[150%] relative bottom-4.5" src={logo} alt="" />
+                </div> */}
                 <div className="hidden md:flex gap-3 items-center">
                     <Link to="/login" className="text-2xl btn-white">Log-in</Link>
                     {token && (

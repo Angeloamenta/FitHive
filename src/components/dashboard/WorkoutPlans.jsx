@@ -18,7 +18,14 @@ const WorkoutPlans = () => {
 
   const [openPlanId, setOpenPlanId] = useState(null);
   const [exerciseFormDayId, setExerciseFormDayId] = useState(null);
-  const [newExerciseName, setNewExerciseName] = useState("");
+  
+  // State completo per aggiungere esercizio (senza position)
+  const [newExerciseData, setNewExerciseData] = useState({
+    name: "",
+    repset: "",
+    rec: "",
+    notes: ""
+  });
 
   const [editPlanId, setEditPlanId] = useState(null);
   const [planNewName, setPlanNewName] = useState("");
@@ -31,8 +38,7 @@ const WorkoutPlans = () => {
     name: "",
     repset: "",
     rec: "",
-    notes: "",
-    position: 0,
+    notes: ""
   });
 
   const selectedCustomer = globalCustomers.find(
@@ -47,37 +53,129 @@ const WorkoutPlans = () => {
   }
 
   const handleDeletePlan = async (id) => {
-    await deleteWorkout(id);
-    fetchCustomers();
+    if (!confirm("Sei sicuro di voler eliminare questa scheda? Tutti i giorni e gli esercizi verranno persi.")) {
+      return;
+    }
+    
+    try {
+      await deleteWorkout(id);
+      fetchCustomers();
+    } catch (error) {
+      console.error("Errore nell'eliminazione della scheda:", error);
+      alert("Errore nell'eliminazione della scheda");
+    }
+  };
+
+  const handleDeleteDay = async (planId, dayId) => {
+    if (!confirm("Sei sicuro di voler eliminare questo giorno? Tutti gli esercizi verranno persi.")) {
+      return;
+    }
+    
+    try {
+      await deleteDay(planId, dayId);
+      fetchCustomers();
+    } catch (error) {
+      console.error("Errore nell'eliminazione del giorno:", error);
+      alert("Errore nell'eliminazione del giorno");
+    }
+  };
+
+  const handleDeleteExercise = async (planId, dayId, exerciseId) => {
+    if (!confirm("Sei sicuro di voler eliminare questo esercizio?")) {
+      return;
+    }
+    
+    try {
+      await deleteExercise(planId, dayId, exerciseId);
+      fetchCustomers();
+    } catch (error) {
+      console.error("Errore nell'eliminazione dell'esercizio:", error);
+      alert("Errore nell'eliminazione dell'esercizio");
+    }
   };
 
   const handleAddExercise = async (dayId) => {
-    if (!newExerciseName) return;
-    await addExercise(openPlanId, dayId, { name: newExerciseName });
-    setNewExerciseName("");
+    if (!newExerciseData.name.trim()) {
+      alert("Il nome dell'esercizio è obbligatorio");
+      return;
+    }
+    
+    try {
+      await addExercise(openPlanId, dayId, newExerciseData);
+      // Reset del form
+      setNewExerciseData({
+        name: "",
+        repset: "",
+        rec: "",
+        notes: ""
+      });
+      setExerciseFormDayId(null);
+      fetchCustomers();
+    } catch (error) {
+      console.error("Errore nell'aggiunta dell'esercizio:", error);
+      alert("Errore nell'aggiunta dell'esercizio");
+    }
+  };
+
+  const handleCancelAddExercise = () => {
+    setNewExerciseData({
+      name: "",
+      repset: "",
+      rec: "",
+      notes: ""
+    });
     setExerciseFormDayId(null);
-    fetchCustomers();
   };
 
   const handleEditPlan = async (planId) => {
-    await editPlan(planId, { name: planNewName });
-    setEditPlanId(null);
-    setPlanNewName("");
-    fetchCustomers();
+    if (!planNewName.trim()) {
+      alert("Il nome della scheda è obbligatorio");
+      return;
+    }
+    
+    try {
+      await editPlan(planId, { name: planNewName });
+      setEditPlanId(null);
+      setPlanNewName("");
+      fetchCustomers();
+    } catch (error) {
+      console.error("Errore nella modifica della scheda:", error);
+      alert("Errore nella modifica della scheda");
+    }
   };
 
   const handleEditDay = async (planId, dayId) => {
-    await editDay(planId, dayId, { name: dayNewName });
-    setEditDayId(null);
-    setDayNewName("");
-    fetchCustomers();
+    if (!dayNewName.trim()) {
+      alert("Il nome del giorno è obbligatorio");
+      return;
+    }
+    
+    try {
+      await editDay(planId, dayId, { name: dayNewName });
+      setEditDayId(null);
+      setDayNewName("");
+      fetchCustomers();
+    } catch (error) {
+      console.error("Errore nella modifica del giorno:", error);
+      alert("Errore nella modifica del giorno");
+    }
   };
 
   const handleEditExercise = async (planId, dayId, exerciseId) => {
-    await editExercise(planId, dayId, exerciseId, exerciseEditValues);
-    setEditExerciseId(null);
-    setExerciseEditValues({ name: "", repset: "", rec: "", notes: "", position: 0 });
-    fetchCustomers();
+    if (!exerciseEditValues.name.trim()) {
+      alert("Il nome dell'esercizio è obbligatorio");
+      return;
+    }
+    
+    try {
+      await editExercise(planId, dayId, exerciseId, exerciseEditValues);
+      setEditExerciseId(null);
+      setExerciseEditValues({ name: "", repset: "", rec: "", notes: "" });
+      fetchCustomers();
+    } catch (error) {
+      console.error("Errore nella modifica dell'esercizio:", error);
+      alert("Errore nella modifica dell'esercizio");
+    }
   };
 
   return (
@@ -124,17 +222,17 @@ const WorkoutPlans = () => {
                 {wp._id === openPlanId ? (
                   <EyeOff
                     onClick={() => setOpenPlanId(null)}
-                    className="w-6 h-6"
+                    className="w-6 h-6 cursor-pointer"
                   />
                 ) : (
                   <Eye
                     onClick={() => setOpenPlanId(wp._id)}
-                    className="w-6 h-6"
+                    className="w-6 h-6 cursor-pointer"
                   />
                 )}
                 <Trash
                   onClick={() => handleDeletePlan(wp._id)}
-                  className="w-6 h-6 text-red-500"
+                  className="w-6 h-6 text-red-500 cursor-pointer"
                 />
               </div>
             ))}
@@ -176,17 +274,19 @@ const WorkoutPlans = () => {
                   )}
                   <div className="flex gap-2">
                     <button
-                      onClick={() =>
-                        setExerciseFormDayId(
-                          exerciseFormDayId === day._id ? null : day._id
-                        )
-                      }
+                      onClick={() => {
+                        if (exerciseFormDayId === day._id) {
+                          handleCancelAddExercise();
+                        } else {
+                          setExerciseFormDayId(day._id);
+                        }
+                      }}
                       className="text-purple-950 hover:underline"
                     >
-                      + Aggiungi esercizio
+                      {exerciseFormDayId === day._id ? "Annulla" : "+ Aggiungi esercizio"}
                     </button>
                     <button
-                      onClick={() => deleteDay(openPlanId, day._id)}
+                      onClick={() => handleDeleteDay(openPlanId, day._id)}
                       className="text-red-500 hover:underline"
                     >
                       Elimina giorno
@@ -194,26 +294,81 @@ const WorkoutPlans = () => {
                   </div>
                 </h3>
 
+                {/* Form completo per aggiungere esercizio (senza position) */}
                 {exerciseFormDayId === day._id && (
-                  <div className="mt-2 flex gap-2 items-center">
-                    <input
-                      type="text"
-                      className="border rounded p-1 flex-1"
-                      placeholder="Nome esercizio"
-                      value={newExerciseName}
-                      onChange={(e) => setNewExerciseName(e.target.value)}
-                    />
-                    <button
-                      onClick={() => handleAddExercise(day._id)}
-                      className="bg-purple-950 text-white px-3 py-1 rounded"
-                    >
-                      Aggiungi
-                    </button>
+                  <div className="mt-3 p-3 bg-white rounded-lg border">
+                    <h4 className="font-medium mb-2">Nuovo Esercizio</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <input
+                        type="text"
+                        className="border rounded p-2"
+                        placeholder="Nome esercizio *"
+                        value={newExerciseData.name}
+                        onChange={(e) =>
+                          setNewExerciseData(prev => ({
+                            ...prev,
+                            name: e.target.value
+                          }))
+                        }
+                      />
+                      <input
+                        type="text"
+                        className="border rounded p-2"
+                        placeholder="Serie/Ripetizioni (es. 3x10)"
+                        value={newExerciseData.repset}
+                        onChange={(e) =>
+                          setNewExerciseData(prev => ({
+                            ...prev,
+                            repset: e.target.value
+                          }))
+                        }
+                      />
+                      <input
+                        type="text"
+                        className="border rounded p-2"
+                        placeholder="Recupero (es. 1min)"
+                        value={newExerciseData.rec}
+                        onChange={(e) =>
+                          setNewExerciseData(prev => ({
+                            ...prev,
+                            rec: e.target.value
+                          }))
+                        }
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <input
+                        type="text"
+                        className="border rounded p-2 w-full"
+                        placeholder="Note (opzionale)"
+                        value={newExerciseData.notes}
+                        onChange={(e) =>
+                          setNewExerciseData(prev => ({
+                            ...prev,
+                            notes: e.target.value
+                          }))
+                        }
+                      />
+                    </div>
+                    <div className="mt-3 flex gap-2">
+                      <button
+                        onClick={() => handleAddExercise(day._id)}
+                        className="bg-purple-950 text-white px-4 py-2 rounded hover:bg-purple-800"
+                      >
+                        Aggiungi Esercizio
+                      </button>
+                      <button
+                        onClick={handleCancelAddExercise}
+                        className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                      >
+                        Annulla
+                      </button>
+                    </div>
                   </div>
                 )}
 
                 <ul className="ml-4 mt-2 list-disc list-inside">
-                  {day.exercises.map((exercise, index) => (
+                  {day.exercises.map((exercise) => (
                     <li
                       key={exercise._id}
                       className="flex flex-col gap-1 border-b border-gray-200 py-1"
@@ -265,24 +420,6 @@ const WorkoutPlans = () => {
                             }
                           />
 
-                          {/* Select posizione */}
-                          <select
-                            className="border rounded p-1"
-                            value={exerciseEditValues.position}
-                            onChange={(e) =>
-                              setExerciseEditValues({
-                                ...exerciseEditValues,
-                                position: parseInt(e.target.value),
-                              })
-                            }
-                          >
-                            {day.exercises.map((_, i) => (
-                              <option key={i} value={i}>
-                                {i + 1}
-                              </option>
-                            ))}
-                          </select>
-
                           <button
                             onClick={() =>
                               handleEditExercise(
@@ -317,7 +454,6 @@ const WorkoutPlans = () => {
                                   repset: exercise.repset || "",
                                   rec: exercise.rec || "",
                                   notes: exercise.notes || "",
-                                  position: index,
                                 });
                               }}
                               className="text-purple-950 hover:underline"
@@ -326,7 +462,7 @@ const WorkoutPlans = () => {
                             </button>
                             <button
                               onClick={() =>
-                                deleteExercise(openPlanId, day._id, exercise._id)
+                                handleDeleteExercise(openPlanId, day._id, exercise._id)
                               }
                               className="text-red-500 hover:underline"
                             >
@@ -347,4 +483,3 @@ const WorkoutPlans = () => {
 };
 
 export default WorkoutPlans;
-
