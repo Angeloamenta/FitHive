@@ -157,8 +157,9 @@ const CustomerWorkoutExercises = () => {
                   className="w-6 h-6 accent-purple-400"
                 />
               </div>
-
               <div className="text-gray-300 ">{exercise.repset}</div>
+              {exercise.rec && <div className="text-gray-300 "><span className="font-bold text-sm">Recupero: </span>{exercise.rec}</div>     
+ }
               {exercise.notes && <div className="text-gray-400 text-sm italic">{exercise.notes}</div>}
             </li>
           );
